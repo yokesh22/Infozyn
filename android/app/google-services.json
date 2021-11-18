@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1073650878127",
+    "project_id": "infozyn-fb6a2",
+    "storage_bucket": "infozyn-fb6a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073650878127:android:90582541e6d24ec8c6f65a",
+        "android_client_info": {
+          "package_name": "com.example.sona_magazine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1073650878127-votbguv42cjatjluo9q3sbj05nker8ll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sona_magazine",
+            "certificate_hash": "6d45fa4c6dade9281c5462d49ecf4017bf803aeb"
+          }
+        },
+        {
+          "client_id": "1073650878127-g8dc68heqk3pfu9iosrdbtaq10o9b9uk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhvPqGjjSw7MULQbEfJyUPngsF8XWTk44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1073650878127-g8dc68heqk3pfu9iosrdbtaq10o9b9uk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
