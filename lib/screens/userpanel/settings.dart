@@ -5,7 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sona_magazine/screens/sigup.dart';
 import 'package:sona_magazine/services/auth.dart';
+import 'package:sona_magazine/services/database.dart';
 import 'package:sona_magazine/services/preferences.dart';
+import 'package:another_flushbar/flushbar.dart';
+
 class SettingPage extends StatefulWidget {
   const SettingPage({ Key? key }) : super(key: key);
 
@@ -16,6 +19,7 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
    final FirebaseAuth auth = FirebaseAuth.instance;
    AuthMethods authMethods = AuthMethods();
+   Database database = Database();
   SharedPreferenceFunctions sharedPreferenceFunctions = SharedPreferenceFunctions();
   var imageUrl,username,useremail,userPhoneno;
   TextEditingController _feedbackcontroller = TextEditingController();
@@ -27,6 +31,17 @@ class _SettingPageState extends State<SettingPage> {
     if(isSwitchednoti == false){
       setState(() {
         isSwitchednoti=true;
+         Flushbar(
+          message:
+              "Notification feature is under Development",
+          icon: Icon(
+            Icons.info_outline,
+            size: 28.0,
+            color: Colors.blue[300],
+          ),
+          duration: Duration(seconds: 3),
+          leftBarIndicatorColor: Colors.blue[300],
+        )..show(context);
       });
     }else{
       setState(() {
@@ -38,10 +53,39 @@ class _SettingPageState extends State<SettingPage> {
     if(isswitcheddata == false){
       setState(() {
         isswitcheddata=true;
+        // ignore: avoid_single_cascade_in_expression_statements
+        Flushbar(
+          message:
+              "Data Saver is Turned on",
+          icon: Icon(
+            Icons.info_outline,
+            size: 28.0,
+            color: Colors.blue[300],
+          ),
+          duration: Duration(seconds: 3),
+          leftBarIndicatorColor: Colors.blue[300],
+        )..show(context);
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(
+        //     content: Text("Data Saver is Turned On")
+        //     )
+        // );
       });
     }else{
       setState(() {
         isswitcheddata=false;
+         // ignore: avoid_single_cascade_in_expression_statements
+         Flushbar(
+          message:
+              "Data Saver is Turned off",
+          icon: Icon(
+            Icons.info_outline,
+            size: 28.0,
+            color: Colors.blue[300],
+          ),
+          duration: const Duration(seconds: 3),
+          leftBarIndicatorColor: Colors.blue[300],
+        )..show(context);
       });
     }
   }
@@ -77,9 +121,9 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xff0c0f14),
+      // backgroundColor: Color(0xff0c0f14),
      appBar: AppBar(
-        backgroundColor:  Color(0xffd17842),
+        backgroundColor:  Color(0xff007bff),
         centerTitle: true,
        title: Text(
           "INFOZYN",
@@ -88,7 +132,7 @@ class _SettingPageState extends State<SettingPage> {
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.italic,
-                  color: Colors.black,
+                  color: Colors.white,
                   letterSpacing: 1
                   )
               ),
@@ -109,7 +153,7 @@ class _SettingPageState extends State<SettingPage> {
               child: Text(
                 "Profile",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize:20.0,
                   fontWeight: FontWeight.bold
                 ),
@@ -134,7 +178,7 @@ class _SettingPageState extends State<SettingPage> {
                     child: Text(
                     username,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize:18.0,
                       fontWeight:FontWeight.w500
                     )
@@ -145,7 +189,7 @@ class _SettingPageState extends State<SettingPage> {
                 child: Text(
                   useremail,
                   style: TextStyle(
-                    color: Colors.white54,
+                    color: Colors.black54,
                     fontSize:16.0,
                     fontWeight:FontWeight.w300
                   )
@@ -153,75 +197,71 @@ class _SettingPageState extends State<SettingPage> {
               ),
               SizedBox(height: 10.0,),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.0,vertical: 10.0),
+            padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
             child: Column(
               children:[
                  Card(
-                   color: Color(0xff141921),
                   child: ListTile(
-                    leading: Icon(Icons.favorite,color: Color(0xffd17842)),
+                    leading: Icon(Icons.favorite,color: Colors.blueAccent),
                     title: Text(
                       "Favourites",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                     trailing: Icon(
                       Icons.arrow_forward_ios_rounded,
-                      color: Color(0xffd17842),
+                      color: Colors.blueAccent,
                     ),
                   ),
                 ),
                 Card(
-                   color: Color(0xff141921),
                   child: ListTile(
-                    leading: Icon(Icons.language_outlined,color: Color(0xffd17842)),
+                    leading: Icon(Icons.language_outlined,color: Colors.blueAccent),
                     title: Text(
                       "Language",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
-                    subtitle: Text("English",style: TextStyle(color: Colors.white54),),
+                    subtitle: Text("English",style: TextStyle(color: Colors.black54),),
                     trailing: Icon(
                       Icons.arrow_forward_ios_rounded,
-                      color: Color(0xffd17842),
+                      color: Colors.blueAccent,
                     ),
                   ),
                 ),
                 Card(
-                   color: Color(0xff141921),
                   child: ListTile(
-                    leading: Icon(Icons.notifications,color: Color(0xffd17842)),
+                    leading: Icon(Icons.notifications,color: Colors.blueAccent),
                     title: Text(
                       "Notification",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                     trailing: Switch(  
                 onChanged: toogleSwitchfornoti,  
                 value: isSwitchednoti,  
-                activeColor: Color(0xffd17842),  
-                activeTrackColor: Color(0xffd17842).withOpacity(0.7),  
+                activeColor: Colors.blue,  
+                activeTrackColor: Colors.blue.withOpacity(0.5),  
               )  
                   ),
                 ),
                 Card(
-                   color: Color(0xff141921),
                   child: ListTile(
-                    leading: Icon(Icons.data_saver_off_rounded,color: Color(0xffd17842)),
+                    leading: Icon(Icons.data_saver_off_rounded,color: Colors.blueAccent),
                     title: Text(
                       "Data Saver",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                     trailing: Switch(  
                 onChanged: toogleSwitchfordata,  
                 value: isswitcheddata,  
-                activeColor: Color(0xffd17842),  
-                activeTrackColor: Color(0xffd17842).withOpacity(0.7),  
+                activeColor: Colors.blue,  
+                activeTrackColor: Colors.blue.withOpacity(0.5),  
               )  
                   ),
                 ),
@@ -239,14 +279,21 @@ class _SettingPageState extends State<SettingPage> {
                      title: Text("Logout",style: TextStyle(color: Colors.white),),
                       content: Text("Do you really want to Logout ?",style: TextStyle(color: Colors.white54)),
                       actions: [
-                        TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    }, child: Text("Cancel",style: TextStyle(color: Colors.white),)),
-                              TextButton(
-                                    onPressed: () {signOut();}, child: Text("Confrim",style: TextStyle(color: Colors.white))),
-
-                      ],
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(
+                                "Cancel",
+                                style: TextStyle(color: Colors.white),
+                              )),
+                          TextButton(
+                              onPressed: () {
+                                signOut();
+                              },
+                              child: Text("Confrim",
+                                  style: TextStyle(color: Colors.white))),
+                        ],
                    );
                  });
               
@@ -258,12 +305,13 @@ class _SettingPageState extends State<SettingPage> {
                 children: [
                   Icon(
                     Icons.logout_rounded,
-                    color:Color(0xffd17842) ,
+                    color:Colors.blueAccent,
+                    size:30
                   ),
                   Text(
-                    "Log Out",
+                    " Log Out",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black54,
                       fontSize: 18.0,
                       fontWeight:FontWeight.w500
                     ),
@@ -276,7 +324,7 @@ class _SettingPageState extends State<SettingPage> {
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 20.0),
             decoration: BoxDecoration(
-              color: Colors.white54.withOpacity(0.2),
+              color: Colors.black54.withOpacity(0.7),
               borderRadius: BorderRadius.circular(10.0)
             ),
             child: Column(
@@ -312,6 +360,8 @@ class _SettingPageState extends State<SettingPage> {
                                     }, child: Text("Cancel",style: TextStyle(color: Colors.white),)),
                               TextButton(
                                     onPressed: () {
+                                      database.uploadFeedback(_feedbackcontroller.text,useremail.toString());
+
                                       Navigator.of(context).pop();
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(
@@ -327,16 +377,16 @@ class _SettingPageState extends State<SettingPage> {
                   
                       leading: Icon(
                         Icons.feedback_rounded,
-                        color: Colors.white54,
+                        color: Colors.white,
                       ),
                       trailing: Icon(
                         Icons.arrow_forward_ios_rounded,
-                        color: Colors.white54,
+                        color: Colors.white,
                       ),
                       title: Text(
                         "Feedback",
                         style: TextStyle(
-                          color: Colors.white54,
+                          color: Colors.white,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -406,16 +456,16 @@ class _SettingPageState extends State<SettingPage> {
                     child: const ListTile(
                       leading: Icon(
                         Icons.contact_support_rounded,
-                        color: Colors.white54,
+                        color: Colors.white,
                       ),
                       trailing: Icon(
                         Icons.arrow_forward_ios_rounded,
-                        color: Colors.white54,
+                        color: Colors.white,
                       ),
                       title: Text(
                         "Contact Us",
                         style: TextStyle(
-                          color: Colors.white54,
+                          color: Colors.white,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -425,16 +475,16 @@ class _SettingPageState extends State<SettingPage> {
                   ListTile(
                     leading: Icon(
                       Icons.lock,
-                      color: Colors.white54,
+                      color: Colors.white,
                     ),
                     trailing: Icon(
                       Icons.arrow_forward_ios_rounded,
-                      color: Colors.white54,
+                      color: Colors.white,
                     ),
                     title: Text(
                       "Privacy Policy",
                       style: TextStyle(
-                        color: Colors.white54,
+                        color: Colors.white,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -443,16 +493,16 @@ class _SettingPageState extends State<SettingPage> {
                   ListTile(
                     leading: Icon(
                       Icons.article_rounded,
-                      color: Colors.white54,
+                      color: Colors.white,
                     ),
                     trailing: Icon(
                       Icons.arrow_forward_ios_rounded,
-                      color: Colors.white54,
+                      color: Colors.white,
                     ),
                     title: Text(
                       "Terms and Conditions",
                       style: TextStyle(
-                        color: Colors.white54,
+                        color: Colors.white,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

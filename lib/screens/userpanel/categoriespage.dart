@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:like_button/like_button.dart';
 import 'package:sona_magazine/screens/userpanel/detailspage.dart';
-import 'package:sona_magazine/screens/userpanel/userpanel.dart';
+import 'package:sona_magazine/screens/userpanel/feeds.dart';
 import 'package:sona_magazine/services/database.dart';
 class Categories extends StatefulWidget {
   const Categories({ Key? key }) : super(key: key);
@@ -18,6 +17,7 @@ class _CategoriesState extends State<Categories> {
    bool isLiked = false;
    int no_of_likes = 10;
    List categorylist = [];
+   List archives = ['year','fine arts','awards','funded projects'];
 
    getcategorylist()async{
      final result = await uploadData.searchCategory(isSelected.toLowerCase());
@@ -49,16 +49,17 @@ Widget categoryoptions({size}){
                       onTap: (){
                         setState(() {
                           isSelected = "All";
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>UserPanel(true)));
+                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>UserPanel(true)));
                         });
                       },
+                     
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                         decoration: BoxDecoration(
-                          color: isSelected=="All"?Colors.white:Colors.black,
+                          color: isSelected=="All"?Colors.blueAccent:Colors.grey,
                           borderRadius: BorderRadius.circular(15.0)
                         ),
-                        child: Text("All",style: TextStyle(color:isSelected=="All" ?Colors.black:Colors.white),)
+                        child: Text("Archives",style: TextStyle(color:isSelected=="All" ?Colors.black:Colors.white),)
                         ),
                     ),
                     SizedBox(width: 10.0,),
@@ -72,10 +73,10 @@ Widget categoryoptions({size}){
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                         decoration: BoxDecoration(
-                          color: isSelected=="Institution" ?Colors.white:Colors.black,
+                          color: isSelected=="Institution" ?Colors.blueAccent:Colors.grey,
                           borderRadius: BorderRadius.circular(15.0)
                         ),
-                        child: Text("Institution",style: TextStyle(color:isSelected=="Institution" ?Colors.black:Colors.white),)
+                        child: Text("Institution",style: TextStyle(color:isSelected=="Institution" ?Colors.white:Colors.white),)
                         ),
                     ),
                     SizedBox(width: 10.0,),
@@ -89,10 +90,10 @@ Widget categoryoptions({size}){
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                         decoration: BoxDecoration(
-                          color: isSelected=="Sports" ?Colors.white:Colors.black,
+                          color: isSelected=="Sports" ?Colors.blueAccent:Colors.grey,
                           borderRadius: BorderRadius.circular(15.0)
                         ),
-                        child: Text("Sports",style: TextStyle(color:isSelected=="Sports" ?Colors.black:Colors.white),)
+                        child: Text("Sports",style: TextStyle(color:isSelected=="Sports" ?Colors.white:Colors.white),)
                         ),
                     ),
                     SizedBox(width: 10.0,),
@@ -106,10 +107,10 @@ Widget categoryoptions({size}){
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                         decoration: BoxDecoration(
-                          color: isSelected=="Technology"?Colors.white:Colors.black,
+                          color: isSelected=="Technology"?Colors.blueAccent:Colors.grey,
                           borderRadius: BorderRadius.circular(15.0)
                         ),
-                        child: Text("Technology",style: TextStyle(color:isSelected=="Technology"?Colors.black:Colors.white),)
+                        child: Text("Technology",style: TextStyle(color:isSelected=="Technology"?Colors.white:Colors.white),)
                         ),
                     ),
                     SizedBox(width: 10.0,),
@@ -123,10 +124,10 @@ Widget categoryoptions({size}){
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                         decoration: BoxDecoration(
-                          color: isSelected=="Placement"?Colors.white:Colors.black,
+                          color: isSelected=="Placement"?Colors.blueAccent:Colors.grey,
                           borderRadius: BorderRadius.circular(15.0)
                         ),
-                        child: Text("Placement",style: TextStyle(color:isSelected=="Placement"?Colors.black:Colors.white),)
+                        child: Text("Placement",style: TextStyle(color:isSelected=="Placement"?Colors.white:Colors.white),)
                         ),
                     ),
                   ],
@@ -162,7 +163,7 @@ Widget categoryoptions({size}){
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.w600,
-              color: Color(0xffd17842),
+              color: Colors.black,
             //    foreground:Paint()
             // ..style = PaintingStyle.stroke
             // ..strokeWidth = 0.9
@@ -172,7 +173,7 @@ Widget categoryoptions({size}){
         ),
         Padding(
           padding: const EdgeInsets.only(left: 10.0,right: 25.0),
-          child: Divider(color: Colors.deepPurple),
+          child: Divider(color: Color(0xffffc107)),
         ),
         SizedBox(height: 10.0,),
         GestureDetector(
@@ -192,12 +193,12 @@ Widget categoryoptions({size}){
             child: RichText(
               text: TextSpan(
                 text: res,
-                style: TextStyle(color: Colors.white54,fontSize: 16.0),
+                style: TextStyle(color: Colors.black54,fontSize: 16.0),
                 children: <TextSpan>[
                   TextSpan(
                     text: " Read More...",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontWeight:FontWeight.w700
                     ),
                   ),
@@ -215,7 +216,7 @@ Widget categoryoptions({size}){
                 child: Text(
                   "Event on :",
                   style: TextStyle(
-                    color: Colors.blue[300],
+                    color: Color(0xffffc107),
                     fontSize: 17.0,
                     fontWeight: FontWeight.w500
                   ),
@@ -226,7 +227,7 @@ Widget categoryoptions({size}){
               Text(
                 date,
                 style: TextStyle(
-                  color: Colors.white54
+                  color: Colors.black54
                 ),
               ),
             ],
@@ -243,17 +244,17 @@ Widget categoryoptions({size}){
   final size = MediaQuery.of(context).size;
 
     return Scaffold(
-       backgroundColor: Color(0xff0c0f14),
+      //  backgroundColor: Color(0xff0c0f14),
       appBar: AppBar(
-        backgroundColor:  Color(0xffd17842),
+        backgroundColor:  Color(0xff007bff),
         centerTitle: true,
         leading: GestureDetector(
           onTap: (){
             Navigator.of(context).pop();
           },
           child: Icon(
-            Icons.arrow_back_ios_rounded,
-            color: Colors.black,
+            Icons.arrow_back_rounded,
+            color: Colors.white,
           ),
         ),
        title: Text(
@@ -263,7 +264,7 @@ Widget categoryoptions({size}){
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.italic,
-                  color: Colors.black,
+                  color: Colors.white,
                   letterSpacing: 1
                   )
               ),
@@ -279,7 +280,7 @@ Widget categoryoptions({size}){
               children: [
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
-                  child: Text("Select a Category",style: TextStyle(color: Colors.white),)),
+                  child: Text("Select a Category",style: TextStyle(color: Colors.black),)),
                   Padding(
                 padding: const EdgeInsets.only(top:30.0),
                 child: Container(

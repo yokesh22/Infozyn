@@ -110,7 +110,7 @@ class _SignUpState extends State<SignUp> {
           child: CircularProgressIndicator(),
         ): SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               Stack(
@@ -118,8 +118,8 @@ class _SignUpState extends State<SignUp> {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height:MediaQuery.of(context).size.height,
-                    decoration: const BoxDecoration(
-                     color: Color(0xff0c0f14)
+                    decoration:  BoxDecoration(
+                      color: Color(0xff007bff)
                     ),
                     child: SafeArea(
                       child: Column(
@@ -132,7 +132,7 @@ class _SignUpState extends State<SignUp> {
                             child: const Text(
                                   "INFOZYN",
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     fontSize: 26.0,
                                     fontWeight: FontWeight.bold,
                                     fontStyle: FontStyle.normal
@@ -147,10 +147,10 @@ class _SignUpState extends State<SignUp> {
                               height: size.height*0.5,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20.0),
-                                color: Colors.white.withOpacity(0.28),
+                                color: Colors.white.withOpacity(0.5),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
+                                      color: Colors.black.withOpacity(0.2),
                                       spreadRadius: 4,
                                       blurRadius: 7,
                                       offset: const Offset(10,10)
@@ -169,7 +169,7 @@ class _SignUpState extends State<SignUp> {
                                       child: Text(
                                         "Login",
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.black,
                                           fontSize: 25.0,
                                           fontWeight: FontWeight.w500,
                                         ),
@@ -196,13 +196,13 @@ class _SignUpState extends State<SignUp> {
                                           decoration: InputDecoration(
                                             prefixIcon: Icon(
                                               Icons.email,
-                                              color: Color(0xffd17842)
+                                              color: Colors.blue
                                             ),
                                             suffixIcon: IconButton(
                                               onPressed: _emailController.clear,
                                               icon: Icon(
                                                 Icons.clear,
-                                                color: Colors.white54,
+                                                color: Colors.black54,
                                                 ),
                                             ),
                                             errorText: loginFail ? "check email" : null,
@@ -210,7 +210,7 @@ class _SignUpState extends State<SignUp> {
                                             labelText: "Email",
                                             labelStyle: const TextStyle(
                                                 fontSize: 18.0,
-                                                color: Colors.white54
+                                                color: Colors.black54
                                             ),
                                             fillColor: Colors.white,
                                             focusedBorder: OutlineInputBorder(
@@ -222,7 +222,7 @@ class _SignUpState extends State<SignUp> {
                                             enabledBorder: OutlineInputBorder(
                                               borderRadius: BorderRadius.circular(10.0),
                                               borderSide: const BorderSide(
-                                                color: Colors.white54,
+                                                color: Colors.black54,
                                                 width: 2.0,
                                               ),
                                             ),
@@ -245,11 +245,11 @@ class _SignUpState extends State<SignUp> {
                                         decoration: InputDecoration(
                                           prefixIcon: Icon(
                                             Icons.lock,
-                                            color: Color(0xffd17842)
+                                            color: Colors.blue
                                           ),
                                           suffixIcon: IconButton(
                                              icon: Icon(
-                                              passwordfield ? Icons.visibility_off : Icons.visibility,color: Colors.white54
+                                              passwordfield ? Icons.visibility_off : Icons.visibility,color: Colors.black54
                                             ),
                                             onPressed: (){
                                               setState(() {
@@ -263,7 +263,7 @@ class _SignUpState extends State<SignUp> {
                                           labelText: "Password",
                                           labelStyle: const TextStyle(
                                               fontSize: 18.0,
-                                              color: Colors.white54
+                                              color: Colors.black54
                                           ),
                                           fillColor: Colors.white,
                                           focusedBorder: OutlineInputBorder(
@@ -275,7 +275,7 @@ class _SignUpState extends State<SignUp> {
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(10.0),
                                             borderSide: const BorderSide(
-                                              color: Colors.white54,
+                                              color: Colors.black54,
                                               width: 2.0,
                                             ),
                                           ),
@@ -314,7 +314,7 @@ class _SignUpState extends State<SignUp> {
                                           child: const Text(
                                             "Login",
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: Colors.black54,
                                               fontSize: 22.0,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -339,21 +339,21 @@ class _SignUpState extends State<SignUp> {
                                 FittedBox(
                                   fit:BoxFit.fitWidth,
                                   child: Text(
-                                    "Don't have a account? ",
+                                    "Click below to",
                                     style: TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.w400,
-                                      color: Colors.white54,
+                                      color: Colors.black54,
                                       fontStyle: FontStyle.italic
                                     ),
                                   ),
                                 ),
                                 Text(
-                                  " Click below",
+                                  " Sign Up",
                                   style: TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white
+                                      color: Colors.black
                                   ),
                                 ),
                               ],
@@ -368,7 +368,7 @@ class _SignUpState extends State<SignUp> {
                               width: size.width*0.8,
                               height: size.height*0.08,
                               decoration: BoxDecoration(
-                                color: Color(0xffd17842),
+                                color: Color(0xffffc107),
                                 borderRadius: BorderRadius.circular(10.0),
                                 border: Border.all(color: Colors.white54),
                                 boxShadow: [
@@ -399,7 +399,7 @@ class _SignUpState extends State<SignUp> {
                                     child: Text(
                                       "Continue with Google",
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: Colors.black54,
                                         fontWeight: FontWeight.w500,
                                         fontSize: 18.0,
                                         fontStyle: FontStyle.italic

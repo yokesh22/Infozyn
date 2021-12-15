@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sona_magazine/screens/userpanel/homepage.dart';
-import 'package:sona_magazine/screens/userpanel/userpanel.dart';
+import 'package:sona_magazine/screens/userpanel/feeds.dart';
 import 'package:sona_magazine/screens/sigup.dart';
 import 'package:sona_magazine/services/preferences.dart';
 

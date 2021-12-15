@@ -46,7 +46,7 @@ class _FirebaseItemsState extends State<FirebaseItems> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:  Color(0xffd17842),
+        backgroundColor:  Colors.blue,
         centerTitle: true,
        title: Text(
           "INFOZYN",
@@ -154,7 +154,6 @@ class _FirebaseItemsState extends State<FirebaseItems> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xffd17842),
         onPressed: (){
           Navigator.push(context, MaterialPageRoute(builder: (context)=>CreatePost()));   
           initialise();

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,6 +27,7 @@ class _UpdateOperationState extends State<UpdateOperation> {
   TextEditingController eventNameController = TextEditingController();
   CustomDate customDate = CustomDate();
   var date = DateTime.now();
+  var x;
 
 
   
@@ -131,6 +133,7 @@ var category;
       setState(() {
         selectedDate = picked;
         dateController.text = DateFormat.yMd().format(selectedDate);
+        x = Timestamp.fromDate(selectedDate);
       });
     }
   }
@@ -159,7 +162,10 @@ var category;
     super.initState();
     titleController.text = widget.data['title'];
     descriptionController.text = widget.data['description'];
-    dateController.text = widget.data['date'];
+    // dateController.text = widget.data['date'];
+    Timestamp y = widget.data['date'];
+    DateTime dateTime = DateTime.parse(y.toDate().toString());
+    dateController.text = DateFormat().add_yMd().format(dateTime);
     timeController.text = widget.data['time'];
     eventNameController.text = widget.data['eventname'];
     imagePath = widget.data['imageurl'];
@@ -169,7 +175,7 @@ var category;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:  Color(0xffd17842),
+        backgroundColor:  Colors.blue,
         centerTitle: true,
         leading:GestureDetector(
           onTap: (){
@@ -498,7 +504,7 @@ var category;
                             widget.data['id'],
                             titleController.text,
                             descriptionController.text,
-                            dateController.text,
+                            x,
                             timeController.text,
                             category.toString().toLowerCase(),
                             eventNameController.text.toLowerCase(),

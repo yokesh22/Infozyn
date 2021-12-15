@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sona_magazine/screens/userpanel/userpanel.dart';
+import 'package:sona_magazine/screens/userpanel/feeds.dart';
 
 class AuthMethods{
   final FirebaseAuth _auth = FirebaseAuth.instance;

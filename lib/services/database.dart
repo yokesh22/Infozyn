@@ -15,7 +15,7 @@ List downurl = [];
 
    Future getlastestfeed() async {
     List items=[];
-    await FirebaseFirestore.instance.collection("wrapper").orderBy('realdate',descending: true).get().then((querysnapshots){
+    await FirebaseFirestore.instance.collection("wrapper").orderBy('date',descending: true).get().then((querysnapshots){
       querysnapshots.docs.forEach((element) {
         items.add(element.data());
       });
@@ -46,6 +46,17 @@ List downurl = [];
     return items;
   }
 
+   Future yearlypost(year) async {
+    List items=[];
+    await FirebaseFirestore.instance.collection("wrapper").where('academicyear',isEqualTo: year).
+    get().then((querysnapshots){
+      querysnapshots.docs.forEach((element) {
+        items.add(element.data());
+      });
+    });
+    return items;
+  }
+
 
   uploadLikes(int likes,docname)async{
     String docid = docname.toString();
@@ -53,9 +64,56 @@ List downurl = [];
     return res;
   }
 
+
+  uploadFeedback(String message,String doc){
+    try{
+       FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+       firebaseFirestore.collection("Feedbacks").doc(doc).set(
+         {
+           "message": message
+         }
+       );
+
+
+    }catch(e){
+      print(e.toString());
+    }
+  }
+
+  updatelike(String uid,bool postid)async{
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    await firestore.collection('likes').doc(uid).set({
+      'postid':postid
+    });
+  }
+getlikevalue(id)async{
+  List items = [];
+  await FirebaseFirestore.instance.collection("likes").where('postid',isEqualTo: id).get().then((querysnapshots){
+      querysnapshots.docs.forEach((element) {
+        items.add(element.data());
+      });
+    });
+    return items;
+}
+
+searchArchives(year,category)async{
+  List items = [];
+  await FirebaseFirestore.instance.collection('wrapper')
+  .where('academic_year',isEqualTo: year )
+  .where('academic_category',isEqualTo: category)
+  .get().then((querysnapshots){
+    querysnapshots.docs.forEach((element) {
+      items.add(element.data());
+    });
+  });
+  return items;
+}
+
+
+
   //CRUD operations.....
 
-  uploadImage(image,filename,title,description,date,time,categoryName,eventName,docname)async{
+  uploadImage(image,filename,title,description,date,time,categoryName,eventName,docname,academicYear,academicCategory)async{
     String url;
     String doc = eventName.toString();
     if(image!=null){
@@ -76,7 +134,10 @@ List downurl = [];
                  "realdate": DateTime.now(),
                  "likes": 0,
                  "categoryname":categoryName,
-                 "eventname":eventName
+                 "eventname":eventName,
+                 "academic_year":academicYear,
+                 "academic_category":academicCategory,
+                 
              });
 
           }catch(e){

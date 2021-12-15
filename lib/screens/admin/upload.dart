@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,7 +55,10 @@ class _CreatePostState extends State<CreatePost> {
   String? filename,imagename ;
   // ignore: unused_field
   var category;
+  var academicyear;
+  var academiccategory;
   var docid;
+  var x;
    DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay(hour: 00, minute: 00);
 List images = [];
@@ -164,6 +168,7 @@ getdocid(String name){
       setState(() {
         selectedDate = picked;
         dateController.text = DateFormat.yMd().format(selectedDate);
+        x = Timestamp.fromDate(selectedDate);
       });
     }
   }
@@ -401,6 +406,112 @@ getdocid(String name){
                 ),
               ),
               SizedBox(height: 10.0,),
+              Divider(),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Text(
+                  "Academic Year & Archive category",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black54),
+                    borderRadius: BorderRadius.circular(10.0)),
+                margin:
+                    EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+                padding:
+                    EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    focusColor: Colors.white,
+                    value: academicyear,
+                    elevation: 5,
+                    style: TextStyle(color: Colors.white),
+                    iconEnabledColor: Colors.black,
+                    items: <String>[
+                      '2018 - 2019',
+                      '2019 - 2020',
+                      '2020 - 2021',
+                      '2021 - 2022',
+                      '2022 - 2023',
+                      '2023 - 2024',
+                      '2024 - 2025',
+                      '2025 - 2026',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      );
+                    }).toList(),
+                    hint: Text(
+                      "Select Academic Year ",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        academicyear = value!;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black54),
+                    borderRadius: BorderRadius.circular(10.0)),
+                margin:
+                    EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+                padding:
+                    EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    focusColor: Colors.white,
+                    value: academiccategory,
+                    elevation: 5,
+                    style: TextStyle(color: Colors.white),
+                    iconEnabledColor: Colors.black,
+                    items: <String>[
+                      'Fine Arts',
+                      'Awards',
+                      'Upcoming Events',
+                      'Funded Projects',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      );
+                    }).toList(),
+                    hint: Text(
+                      "Select Academic Category ",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        academiccategory = value!;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              Divider(),
+              SizedBox(height: 10.0,),
               Padding(
                 padding: const EdgeInsets.only(left: 10.0),
                 child: Text(
@@ -573,18 +684,22 @@ getdocid(String name){
                         dateController.text != "" &&
                         timeController.text != "" &&
                         category.toString() != "" &&
+                        academicyear.toString() !=""&&
+                        academiccategory.toString() !="" &&
                         eventNameController.text != "") {
                       await uploadData.uploadImage(
                           file,
                           filename,
                           titleController.text,
                           descriptionController.text,
-                          dateController.text,
+                          x,
                           timeController.text,
                           category.toString().toLowerCase(),
                           eventNameController.text.toLowerCase(),
                           eventNameController.text.toUpperCase(),
-                          );
+                          academicyear.toString(),
+                          academiccategory.toString().toLowerCase(),
+                        );
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text("uploaded successfully")),
                       );
@@ -604,5 +719,10 @@ getdocid(String name){
         ),
       ),
     );
+  }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('academic', academicyear));
   }
 }
