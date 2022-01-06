@@ -80,21 +80,24 @@ List downurl = [];
     }
   }
 
-  updatelike(String uid,bool postid)async{
+  updatelike(String uid,String postid,bool val)async{
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     await firestore.collection('likes').doc(uid).set({
-      'postid':postid
+      postid:val
     });
   }
-getlikevalue(id)async{
-  List items = [];
-  await FirebaseFirestore.instance.collection("likes").where('postid',isEqualTo: id).get().then((querysnapshots){
-      querysnapshots.docs.forEach((element) {
-        items.add(element.data());
-      });
-    });
-    return items;
-}
+  
+
+
+// getlikevalue(id)async{
+//   List items = [];
+//   await FirebaseFirestore.instance.collection("likes").where('postid',isEqualTo: id).get().then((querysnapshots){
+//       querysnapshots.docs.forEach((element) {
+//         items.add(element.data());
+//       });
+//     });
+//     return items;
+// }
 
 searchArchives(year,category)async{
   List items = [];
